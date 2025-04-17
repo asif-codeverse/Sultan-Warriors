@@ -1,21 +1,43 @@
+const express = require('express');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+const router = express.Router();
 
-// Authentication middleware to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-  const token = req.cookies.token; // Get token from cookies
-
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized, please log in.' });
-  }
+// Login Route
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-    // Decode the token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;  // Attach user information to the request
-    next();  // Continue to the next middleware or route handler
-  } catch (error) {
-    return res.status(403).json({ message: 'Invalid or expired token' });
-  }
-};
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
 
-module.exports = isAuthenticated;
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: '1h' }
+    );
+
+    // Set token in cookie
+    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
+    res.json({
+      message: 'Login successful'
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+module.exports = router;
