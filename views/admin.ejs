@@ -1,20 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | MindMend</title>
-    <link href="/styles.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | MindMend</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Optional: Custom styles -->
+  <link href="/styles.css" rel="stylesheet" />
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-600 text-white p-4">
-        <h1 class="text-xl">MindMend - Admin</h1>
-    </header>
-    <div class="flex justify-center items-center h-screen">
-        <div class="text-center">
-            <h2 class="text-2xl font-bold mb-4">Admin Dashboard</h2>
-            <a href="/admin/journal-entries" class="bg-blue-600 text-white px-6 py-2 rounded">View Journal Entries</a>
-        </div>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+  <!-- Navbar (Optional Partial) -->
+  <!-- <% include ../partials/navbar.ejs %> -->
+  <nav class="bg-[#00509D] text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Brand -->
+        <a href="/" class="text-2xl font-bold tracking-wide hover:text-yellow-300 transition duration-200">
+          MindMend
+        </a>
+  
+        <!-- Nav Links -->
+        <ul class="flex space-x-4 text-sm sm:text-base font-medium">
+          <li><a href="/home" class="hover:underline hover:text-yellow-300">Home</a></li>
+          <li><a href="/dashboard" class="hover:underline hover:text-yellow-300">Dashboard</a></li>
+          <li><a href="/journal" class="hover:underline hover:text-yellow-300">Journal</a></li>
+          <li><a href="/mood" class="hover:underline hover:text-yellow-300">Mood</a></li>
+          <li><a href="/chat" class="hover:underline hover:text-yellow-300">Chat</a></li>
+          <li><a href="/admin" class="hover:underline hover:text-yellow-300">Admin</a></li>
+          <li>
+            <a href="/logout" class="text-red-300 hover:text-red-400 hover:underline transition duration-150">
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+  
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-800 to-blue-600 text-white p-6 shadow-md">
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-3xl font-semibold">🛠️ Admin Dashboard - MindMend</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex items-center justify-center py-20 px-4">
+    <div class="bg-white shadow-lg rounded-xl p-10 w-full max-w-md text-center">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Welcome, Admin</h2>
+      <p class="text-gray-600 mb-4">Monitor user activity, view flagged journals, and manage support tasks.</p>
+      
+      <a href="/admin/journal-entries" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition">
+        📖 View Journal Entries
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer (Optional Partial) -->
+  <% include ../partials/footer.ejs %>
+
 </body>
 </html>
