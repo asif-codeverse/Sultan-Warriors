@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>MindMend Dashboard</title>
-  <script src="/js/main.js" defer></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Use defer to ensure the scripts are executed after DOM is ready -->
   <script src="/js/main.js" defer></script>
   <script src="/js/emotionDetection.js" defer></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <script defer src="/path/to/face-api.min.js"></script>
+  <!-- index.ejs or your dashboard file -->
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+<script defer src="/js/emotionDetection.js"></script>
 
 </head>
 <body class="bg-gray-100 text-gray-800 p-8">
@@ -69,23 +76,21 @@
     </div>
 
    <!-- 🎥 Webcam Emotion Detection -->
-<div class="bg-white p-4 rounded shadow mt-8">
-    <h2 class="text-xl font-semibold mb-4">🎥 Detect Emotion via Webcam</h2>
+   <div class="bg-white p-4 rounded shadow mt-8">
+      <h2 class="text-xl font-semibold mb-4">🎥 Detect Emotion via Webcam</h2>
   
-    <div class="flex flex-col items-center space-y-4">
-      <video id="webcam" autoplay playsinline class="rounded shadow w-64 h-48 border"></video>
-      <canvas id="canvas" width="640" height="480" class="hidden"></canvas>
-  
-      <button onclick="captureImage()" class="bg-purple-600 text-white px-6 py-2 rounded">
-        Analyze Emotion
-      </button>
-  
-      <p id="emotionResult" class="text-lg font-semibold mt-2"></p>
+      <div class="flex flex-col items-center space-y-4">
+        <video id="webcam" autoplay playsinline class="rounded shadow w-64 h-48 border"></video>
+        <canvas id="canvas" width="640" height="480" class="hidden"></canvas>
+    
+        <!-- Ensure button has id="captureButton" -->
+        <button id="captureButton" class="bg-purple-600 text-white px-6 py-2 rounded">
+          Analyze Emotion
+        </button>
+    
+        <p id="emotionResult" class="text-lg font-semibold mt-2"></p>
+      </div>
     </div>
-  </div>
-  
-  
-
   
   </div>
 </body>
